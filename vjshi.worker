@@ -1,0 +1,4 @@
+# define the runtime language
+runtime 'go'
+# exec is the file that will be executed:
+exec 'vjshi.go'
