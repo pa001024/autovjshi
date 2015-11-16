@@ -38,6 +38,10 @@ func main() {
 			v.LoginAndSign()
 		}
 	} else {
+		if *u == "" {
+			flag.Usage()
+			return
+		}
 		v := NewUser(*u, *p, *q)
 		if *isRegist {
 			err := v.Regist()
