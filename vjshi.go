@@ -26,29 +26,28 @@ const (
 // VJshi batch op
 func main() {
 	isRegist := flag.Bool("r", false, "isRegist: -r require -u -p -q otherwise -u -p")
+	isBatch := flag.Bool("b", false, "isBatch: -b")
 	u := flag.String("u", "", "username")
 	p := flag.String("p", DEFAULT_PASSWORD, "password")
 	q := flag.String("q", "", "qq number")
 	flag.Parse()
-	v := NewUser(*u, *p, *q)
-	if *isRegist {
-		err := v.Regist()
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			fmt.Printf("注册成功: 账号: %s 密码: %s QQ: %s\n", *u, *p, *q)
+	if *isBatch {
+		for i := 1; i <= 99; i++ {
+			uname := fmt.Sprintf("vjqq12011158%02d", i)
+			v := NewUser(uname, DEFAULT_PASSWORD, "")
+			v.LoginAndSign()
 		}
 	} else {
-		err := v.Login()
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			err = v.Sign()
+		v := NewUser(*u, *p, *q)
+		if *isRegist {
+			err := v.Regist()
 			if err != nil {
-				fmt.Println("签到失败: " + err.Error())
+				fmt.Println(err)
 			} else {
-				fmt.Printf("签到成功: 账号: %s \n", *u)
+				fmt.Printf("注册成功: 账号: %s 密码: %s QQ: %s\n", *u, *p, *q)
 			}
+		} else {
+			v.LoginAndSign()
 		}
 	}
 }
@@ -157,5 +156,19 @@ func (this *User) Sign() (err error) {
 		return
 	} else {
 		return errors.New(obj["info"])
+	}
+}
+
+func (this *User) LoginAndSign() {
+	err := this.Login()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		err = this.Sign()
+		if err != nil {
+			fmt.Printf("签到失败: 账号: %s \n %s", this.Username, err)
+		} else {
+			fmt.Printf("签到成功: 账号: %s \n", this.Username)
+		}
 	}
 }
