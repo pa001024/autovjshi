@@ -64,7 +64,11 @@ func main() {
 				}
 			}
 			if err != nil {
-				util.ERROR.Log(err)
+				if err.Error() == "您已经签到过了" {
+					err = nil
+				} else {
+					util.ERROR.Log(err)
+				}
 			}
 			key2user[uname] = UserState{uname, err == nil, bp}
 		}
