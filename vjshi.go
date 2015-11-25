@@ -82,13 +82,13 @@ func main() {
 			count_bp_all += key2user[v].bp
 		}
 		if count_fail == 0 {
-			util.INFO.Logf("%s ~ %s 全部签到完毕\n", fmt.Sprintf(unamefmt, 1), fmt.Sprintf(unamefmt, 99))
+			util.INFO.Logf("%s ~ %s 全部签到完毕", fmt.Sprintf(unamefmt, 1), fmt.Sprintf(unamefmt, 99))
 		} else {
-			util.INFO.Logf("%s ~ %s 部分签到完毕 失败 %d 个\n", fmt.Sprintf(unamefmt, 1), fmt.Sprintf(unamefmt, 99), count_fail)
+			util.INFO.Logf("%s ~ %s 部分签到完毕 失败 %d 个", fmt.Sprintf(unamefmt, 1), fmt.Sprintf(unamefmt, 99), count_fail)
 			fmt.Println("输入以下指令重试:")
 			fmt.Println(failed_list)
 		}
-		util.INFO.Logf("今日共获取 %d 积分 总计 %d 积分 平均每账号 %d 积分\n",
+		util.INFO.Logf("今日共获取 %d 积分 总计 %d 积分 平均每账号 %d 积分",
 			(99-count_fail)*10,
 			count_bp_all,
 			count_bp_all/99,
@@ -112,7 +112,7 @@ func main() {
 				fmt.Println(err)
 			} else {
 				bp, _ := v.GetBounsPoint()
-				fmt.Printf("签到成功: 账号: %s 当前积分: %d", *u, bp)
+				fmt.Printf("签到成功: 账号: %s 当前积分: %d\n", *u, bp)
 			}
 		}
 	}
