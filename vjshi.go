@@ -202,7 +202,7 @@ func (this *User) Login() (err error) {
 }
 
 func (this *User) Sign() (err error) {
-	res, err := this.get("/user/daysign?callback=jQuery18300392456746451165_"+util.JsCurrentTime(), "")
+	res, err := this.get("/user/daysign?callback=jQuery18300392456746451165_"+util.JsCurrentTime(), SITE_BASE)
 	if err != nil {
 		return
 	}
